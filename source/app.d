@@ -1,4 +1,5 @@
 import raylib;
+import collision;
 
 void main()
 {
@@ -6,6 +7,9 @@ void main()
     validateRaylibBinding();
     InitWindow(800, 600, "Hello, Raylib-D!");
     SetTargetFPS(60);
+
+    //player_body = physics_object(vector2));
+
     while (!WindowShouldClose())
     {
         BeginDrawing();

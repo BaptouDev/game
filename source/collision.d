@@ -1,38 +1,39 @@
 module collision;
-import vector;
+//import vector;
+import raylib;
 
-struct collision_rect{
-    vector2 pos;
-    vector2 size;
-    this(vector2 _pos,vector2 _size){
+struct CollisionRect{
+    Vector2 pos;
+    Vector2 size;
+    this(Vector2 _pos,Vector2 _size){
        pos = _pos;
        size = _size;
     }
 }
 
-bool aabb_detect(collision_rect a,collision_rect b){
+bool aabb_detect(CollisionRect a,CollisionRect b){
     return (a.pos.x + a.size.x >=b.pos.x)
     &&(a.pos.x<=b.pos.x+b.size.x)
     &&(a.pos.y + a.size.y >=b.pos.y)
     &&(a.pos.y<=b.pos.y+b.size.y);
 }
 
-struct physics_object{
-    vector2 pos;
-    vector2 offset;
-    vector2 size;
-    vector2 velocity;
-    collision_rect rect;
-    vector2 last_pos;
-    this(vector2 _pos,vector2 _offset, vector2 _size,collision_rect _rect){
+struct PhysicsObject{
+    Vector2 pos;
+    Vector2 offset;
+    Vector2 size;
+    Vector2 velocity;
+    CollisionRect rect;
+    Vector2 last_pos;
+    this(Vector2 _pos,Vector2 _offset, Vector2 _size,CollisionRect _rect){
         pos = _pos;
         offset = _offset;
         size = _size;
-        velocity = vector2(0,0);
-        rect = collision_rect(pos+offset,size);
+        velocity = Vector2(0,0);
+        rect = CollisionRect(pos+offset,size);
         last_pos = pos;
     }
-    void update_vel(vector2 new_vel, physics_object o,float dt){
+    void update_vel(Vector2 new_vel, PhysicsObject o,float dt){
         velocity = new_vel;
         pos.x+= velocity.x*dt;
         rect.pos.x = pos.x+offset.x;
